@@ -22,6 +22,3 @@ A simple Java console application for managing student records.
 2. Run the Main.java file.
 3. Follow the menu on the console.
 
-## Author
-
-Bahar
