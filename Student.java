@@ -1,67 +1,83 @@
 public class Student {
 
-    private int id;
+    private String id;
     private String name;
     private int age;
     private String department;
     private double gpa;
 
-    public Student(int id, String name, int age, String department, double gpa) {
+    public Student(String id, String name, int age, String department, double gpa) {
         this.id = id;
         this.name = name;
-        this.age = age;
+        setAge(age);
         this.department = department;
-        this.gpa = gpa;
+        setGpa(gpa);
     }
 
-    public int getId() {
+    // Getters
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public double getGpa() {
         return gpa;
     }
 
+    // Setters
+    public void setId(String id) {
+        if (id != null && !id.trim().isEmpty()) {
+            this.id = id.trim();
+        }
+    }
+
+    public void setName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name.trim();
+        }
+    }
+
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Invalid age!");
+        }
+    }
+
+    public void setDepartment(String department) {
+        if (department != null && !department.trim().isEmpty()) {
+            this.department = department.trim();
+        }
+    }
+
     public void setGpa(double gpa) {
-        this.gpa = gpa;
+        if (gpa >= 0.0 && gpa <= 4.0) {
+            this.gpa = gpa;
+        } else {
+            System.out.println("GPA must be between 0.0 and 4.0");
+        }
     }
 
     @Override
     public String toString() {
-        return "------------------------\n" +
+        return "-----------------------------\n" +
                "Student ID : " + id + "\n" +
                "Name       : " + name + "\n" +
                "Age        : " + age + "\n" +
                "Department : " + department + "\n" +
-               "GPA        : " + gpa + "\n" +
-               "------------------------";
+               "GPA        : " + String.format("%.2f", gpa) + "\n" +
+               "-----------------------------";
     }
 }
