@@ -6,12 +6,19 @@ public class StudentManager {
 
     // Add Student
     public void addStudent(Student student) {
+
+        if (searchStudent(student.getId()) != null) {
+            System.out.println("A student with this ID already exists!");
+            return;
+        }
+
         students.add(student);
         System.out.println("Student added successfully!");
     }
 
     // View All Students
     public void viewStudents() {
+
         if (students.isEmpty()) {
             System.out.println("No students found.");
             return;
@@ -23,17 +30,21 @@ public class StudentManager {
     }
 
     // Search Student
-    public Student searchStudent(int id) {
+    public Student searchStudent(String id) {
+
         for (Student student : students) {
-            if (student.getId() == id) {
+
+            if (student.getId().equalsIgnoreCase(id)) {
                 return student;
             }
         }
+
         return null;
     }
 
     // Delete Student
-    public void deleteStudent(int id) {
+    public void deleteStudent(String id) {
+
         Student student = searchStudent(id);
 
         if (student != null) {
@@ -45,19 +56,27 @@ public class StudentManager {
     }
 
     // Update Student
-    public void updateStudent(int id, String name, int age, String department, double gpa) {
+    public void updateStudent(String id, String name, int age, String department, double gpa) {
 
         Student student = searchStudent(id);
 
         if (student != null) {
+
             student.setName(name);
             student.setAge(age);
             student.setDepartment(department);
             student.setGpa(gpa);
 
             System.out.println("Student updated successfully!");
+
         } else {
+
             System.out.println("Student not found.");
         }
+    }
+
+    // Return all students (for Swing JTable later)
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 }
