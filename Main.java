@@ -18,39 +18,64 @@ public class Main {
             System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            String input = scanner.nextLine();
+
+            int choice;
+
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid option! Please enter a number.");
+                continue;
+            }
 
             switch (choice) {
 
                 case 1:
+
                     System.out.print("Student ID: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
+                    String id = scanner.nextLine().trim();
 
                     System.out.print("Name: ");
-                    String name = scanner.nextLine();
+                    String name = scanner.nextLine().trim();
 
                     System.out.print("Age: ");
-                    int age = scanner.nextInt();
-                    scanner.nextLine();
+                    int age;
+
+                    try {
+                        age = Integer.parseInt(scanner.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid age!");
+                        break;
+                    }
 
                     System.out.print("Department: ");
-                    String department = scanner.nextLine();
+                    String department = scanner.nextLine().trim();
 
                     System.out.print("GPA: ");
-                    double gpa = scanner.nextDouble();
+                    double gpa;
+
+                    try {
+                        gpa = Double.parseDouble(scanner.nextLine().replace(",", "."));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid GPA!");
+                        break;
+                    }
 
                     manager.addStudent(new Student(id, name, age, department, gpa));
                     break;
 
                 case 2:
+
                     manager.viewStudents();
                     break;
 
                 case 3:
+
                     System.out.print("Enter Student ID: ");
-                    Student student = manager.searchStudent(scanner.nextInt());
+                    String searchId = scanner.nextLine().trim();
+
+                    Student student = manager.searchStudent(searchId);
 
                     if (student != null)
                         System.out.println(student);
@@ -60,37 +85,55 @@ public class Main {
                     break;
 
                 case 4:
+
                     System.out.print("Student ID: ");
-                    int updateId = scanner.nextInt();
-                    scanner.nextLine();
+                    String updateId = scanner.nextLine().trim();
 
                     System.out.print("New Name: ");
-                    String newName = scanner.nextLine();
+                    String newName = scanner.nextLine().trim();
 
                     System.out.print("New Age: ");
-                    int newAge = scanner.nextInt();
-                    scanner.nextLine();
+                    int newAge;
+
+                    try {
+                        newAge = Integer.parseInt(scanner.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid age!");
+                        break;
+                    }
 
                     System.out.print("New Department: ");
-                    String newDepartment = scanner.nextLine();
+                    String newDepartment = scanner.nextLine().trim();
 
                     System.out.print("New GPA: ");
-                    double newGpa = scanner.nextDouble();
+                    double newGpa;
+
+                    try {
+                        newGpa = Double.parseDouble(scanner.nextLine().replace(",", "."));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid GPA!");
+                        break;
+                    }
 
                     manager.updateStudent(updateId, newName, newAge, newDepartment, newGpa);
                     break;
 
                 case 5:
+
                     System.out.print("Student ID: ");
-                    manager.deleteStudent(scanner.nextInt());
+                    String deleteId = scanner.nextLine().trim();
+
+                    manager.deleteStudent(deleteId);
                     break;
 
                 case 6:
+
                     System.out.println("Goodbye!");
                     scanner.close();
                     return;
 
                 default:
+
                     System.out.println("Invalid option.");
             }
         }
