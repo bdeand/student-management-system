@@ -5,15 +5,14 @@ public class StudentManager {
     private ArrayList<Student> students = new ArrayList<>();
 
     // Add Student
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
 
         if (searchStudent(student.getId()) != null) {
-            System.out.println("A student with this ID already exists!");
-            return;
+            return false;
         }
 
         students.add(student);
-        System.out.println("Student added successfully!");
+        return true;
     }
 
     // View All Students
@@ -43,20 +42,21 @@ public class StudentManager {
     }
 
     // Delete Student
-    public void deleteStudent(String id) {
+    public boolean deleteStudent(String id) {
 
         Student student = searchStudent(id);
 
         if (student != null) {
             students.remove(student);
-            System.out.println("Student deleted successfully!");
-        } else {
-            System.out.println("Student not found.");
+            return true;
         }
+
+        return false;
     }
 
     // Update Student
-    public void updateStudent(String id, String name, int age, String department, double gpa) {
+    public boolean updateStudent(String id, String name, int age,
+                                 String department, double gpa) {
 
         Student student = searchStudent(id);
 
@@ -67,16 +67,24 @@ public class StudentManager {
             student.setDepartment(department);
             student.setGpa(gpa);
 
-            System.out.println("Student updated successfully!");
-
-        } else {
-
-            System.out.println("Student not found.");
+            return true;
         }
+
+        return false;
     }
 
-    // Return all students (for Swing JTable later)
+    // Get All Students (for JTable)
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    // Total Students
+    public int getStudentCount() {
+        return students.size();
+    }
+
+    // Clear All Students (ileride kullanacağız)
+    public void clearStudents() {
+        students.clear();
     }
 }
